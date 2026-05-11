@@ -5,9 +5,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "RevenueReception AI - Never Miss Another Revenue Call",
+  title: "RevenueReception AI",
   description:
-    "AI phone receptionist that answers 24/7, qualifies callers, books appointments, and updates your CRM.",
+    "AI voice receptionists that answer calls, qualify leads, book appointments, send SMS follow-ups, update CRM, and track recovered revenue.",
 };
 
 export default function RootLayout({

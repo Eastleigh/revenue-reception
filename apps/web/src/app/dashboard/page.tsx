@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Phone,
   PhoneIncoming,
@@ -158,18 +159,18 @@ export default function DashboardPage() {
           <div className="bg-white rounded-xl border border-gray-200 p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Quick Actions</h3>
             <div className="space-y-3">
-              <a href="/calls" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+              <Link href="/calls" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
                 <div className="font-medium text-gray-900 text-sm">View Recent Calls</div>
                 <div className="text-gray-500 text-xs mt-0.5">See transcripts and details</div>
-              </a>
-              <a href="/onboarding" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+              </Link>
+              <Link href="/onboarding" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
                 <div className="font-medium text-gray-900 text-sm">Add New Agent</div>
                 <div className="text-gray-500 text-xs mt-0.5">Create another AI receptionist</div>
-              </a>
-              <a href="/billing" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+              </Link>
+              <Link href="/billing" className="block p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
                 <div className="font-medium text-gray-900 text-sm">Manage Billing</div>
                 <div className="text-gray-500 text-xs mt-0.5">View usage and upgrade plan</div>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
