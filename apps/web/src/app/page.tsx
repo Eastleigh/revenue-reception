@@ -43,12 +43,14 @@ function Metric({ icon: Icon, label, value }: MetricProps) {
 interface PricingCardProps {
   name: string;
   price: string;
+  unit: string;
   desc: string;
   features: string[];
   featured?: boolean;
+  cta: string;
 }
 
-function PricingCard({ name, price, desc, features, featured }: PricingCardProps) {
+function PricingCard({ name, price, unit, desc, features, featured, cta }: PricingCardProps) {
   return (
     <Card
       className={`rounded-[2rem] ${
@@ -60,7 +62,7 @@ function PricingCard({ name, price, desc, features, featured }: PricingCardProps
       <CardContent className="p-8">
         {featured && (
           <div className="mb-5 inline-flex rounded-full bg-slate-950 px-4 py-2 text-sm font-bold text-cyan-300">
-            Most Popular
+            Best Value
           </div>
         )}
 
@@ -68,7 +70,7 @@ function PricingCard({ name, price, desc, features, featured }: PricingCardProps
 
         <div className="mt-5 flex items-end gap-2">
           <p className="text-5xl font-black">{price}</p>
-          <p className={featured ? "mb-2 text-slate-700" : "mb-2 text-slate-400"}>/month</p>
+          <p className={featured ? "mb-2 text-slate-700" : "mb-2 text-slate-400"}>/{unit}</p>
         </div>
 
         <p className={`mt-4 leading-7 ${featured ? "text-slate-800" : "text-slate-300"}`}>{desc}</p>
@@ -88,7 +90,7 @@ function PricingCard({ name, price, desc, features, featured }: PricingCardProps
               featured ? "bg-slate-950 text-white hover:bg-slate-800" : "bg-white text-slate-950 hover:bg-slate-200"
             }`}
           >
-            Choose {name}
+            {cta}
           </Button>
         </Link>
       </CardContent>
@@ -149,7 +151,7 @@ export default function RevenueReceptionAIWebsite() {
     "CRM, calendar, SMS, and analytics built into one system",
     "White-label model for agencies and consultants",
     "Perfect for high-ticket local service businesses",
-    "Simple monthly pricing with usage-based upside",
+    "Pay-per-minute pricing — only pay for real conversations",
   ];
 
   const steps = [
@@ -417,35 +419,67 @@ export default function RevenueReceptionAIWebsite() {
 
       <section id="pricing" className="px-6 py-20">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 text-center">
+          <div className="mb-6 text-center">
             <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-cyan-300">Pricing</p>
-            <h2 className="text-4xl font-black md:text-5xl">Simple plans. High-margin recurring revenue.</h2>
+            <h2 className="text-4xl font-black md:text-5xl">Only pay for real conversations.</h2>
             <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300">
-              Start with one niche, prove ROI, then expand into white-label agency accounts.
+              No monthly minimums. No wasted minutes. Just transparent per-minute billing that scales with your call volume.
+            </p>
+          </div>
+
+          {/* Cost comparison */}
+          <div className="mx-auto mb-14 max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-6">
+            <p className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-cyan-300">Why per-minute wins</p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 text-center">
+                <p className="text-2xl font-black text-red-400">$25/hr</p>
+                <p className="mt-1 text-sm text-slate-400">Human receptionist</p>
+              </div>
+              <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
+                <p className="text-2xl font-black text-amber-400">$1.50/min</p>
+                <p className="mt-1 text-sm text-slate-400">Answering service</p>
+              </div>
+              <div className="rounded-xl border border-cyan-400/30 bg-cyan-400/10 p-4 text-center">
+                <p className="text-2xl font-black text-cyan-300">$0.69/min</p>
+                <p className="mt-1 text-sm text-slate-400">RevenueReception AI</p>
+              </div>
+            </div>
+            <p className="mt-4 text-center text-sm text-slate-400">
+              A 3-minute call costs you ~$2.07 — and books a $500+ service appointment.
             </p>
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
             <PricingCard
-              name="Starter"
-              price="$297"
-              desc="For small businesses that need calls answered."
-              features={["1 AI receptionist", "300 minutes included", "Call summaries", "Basic dashboard", "SMS confirmations"]}
+              name="Pay As You Go"
+              price="$0.99"
+              unit="min"
+              desc="Zero commitment. Perfect for getting started or low-volume businesses."
+              features={["No monthly fee", "1 AI receptionist", "Call summaries & transcripts", "Basic dashboard", "SMS confirmations"]}
+              cta="Start Free Trial"
             />
             <PricingCard
               featured
               name="Growth"
-              price="$497"
-              desc="For businesses that want booked appointments and CRM automation."
-              features={["Everything in Starter", "750 minutes included", "Google Calendar booking", "GoHighLevel integration", "Revenue tracking"]}
+              price="$0.69"
+              unit="min"
+              desc="Volume pricing for businesses booking 20+ appointments per month."
+              features={["500+ min/month commitment", "Google Calendar booking", "GoHighLevel integration", "Revenue tracking & ROI", "Priority support"]}
+              cta="Get Started"
             />
             <PricingCard
               name="Agency"
-              price="$997"
-              desc="For agencies reselling AI receptionists to clients."
-              features={["5 client accounts", "White-label dashboard", "Multi-location support", "Advanced reporting", "Priority onboarding"]}
+              price="$0.49"
+              unit="min"
+              desc="Wholesale rates for agencies reselling AI receptionists to clients."
+              features={["2,000+ min/month across accounts", "White-label dashboard", "Multi-location support", "Advanced reporting", "Dedicated onboarding"]}
+              cta="Talk to Sales"
             />
           </div>
+
+          <p className="mt-8 text-center text-sm text-slate-500">
+            All plans include unlimited AI receptionists, all 8 industry templates, and full webhook/CRM support. No setup fees.
+          </p>
         </div>
       </section>
 
