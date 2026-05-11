@@ -427,26 +427,88 @@ export default function RevenueReceptionAIWebsite() {
             </p>
           </div>
 
-          {/* Cost comparison */}
-          <div className="mx-auto mb-14 max-w-3xl rounded-2xl border border-white/10 bg-white/5 p-6">
-            <p className="mb-4 text-center text-sm font-bold uppercase tracking-widest text-cyan-300">Why per-minute wins</p>
-            <div className="grid gap-4 sm:grid-cols-3">
-              <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 text-center">
-                <p className="text-2xl font-black text-red-400">$25/hr</p>
-                <p className="mt-1 text-sm text-slate-400">Human receptionist</p>
+          {/* The case for per-minute */}
+          <div className="mx-auto mb-14 max-w-4xl">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-8 md:p-10">
+              <p className="mb-6 text-center text-sm font-bold uppercase tracking-widest text-cyan-300">
+                Why we charge per minute — not per month
+              </p>
+
+              <div className="mb-8 grid gap-6 md:grid-cols-2">
+                <div className="space-y-4">
+                  <div className="flex gap-3">
+                    <DollarSign className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
+                    <div>
+                      <p className="font-bold text-white">You only pay when the AI is working</p>
+                      <p className="mt-1 text-sm text-slate-400">No calls this week? You pay $0. Flat monthly fees punish slow months.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <BarChart3 className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
+                    <div>
+                      <p className="font-bold text-white">ROI is obvious on every invoice</p>
+                      <p className="mt-1 text-sm text-slate-400">You can see exactly how many minutes → appointments → revenue. No guessing.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Zap className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
+                    <div>
+                      <p className="font-bold text-white">Scales automatically with your business</p>
+                      <p className="mt-1 text-sm text-slate-400">Busy season? More calls, more bookings. No plan upgrades or overages to manage.</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="space-y-4">
+                  <div className="flex gap-3">
+                    <Clock className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
+                    <div>
+                      <p className="font-bold text-white">No contracts, no minimums to start</p>
+                      <p className="mt-1 text-sm text-slate-400">Try it with your next 10 calls. If it doesn&apos;t book appointments, you spent under $30.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
+                    <div>
+                      <p className="font-bold text-white">Every minute is a real conversation</p>
+                      <p className="mt-1 text-sm text-slate-400">We don&apos;t charge for rings, voicemails, or spam. Only qualified, connected calls.</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <Building2 className="mt-0.5 h-5 w-5 flex-none text-cyan-300" />
+                    <div>
+                      <p className="font-bold text-white">Built for seasonal service businesses</p>
+                      <p className="mt-1 text-sm text-slate-400">HVAC, roofing, landscaping — your call volume swings 5x. Your bill should too.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
-                <p className="text-2xl font-black text-amber-400">$1.50/min</p>
-                <p className="mt-1 text-sm text-slate-400">Answering service</p>
-              </div>
-              <div className="rounded-xl border border-cyan-400/30 bg-cyan-400/10 p-4 text-center">
-                <p className="text-2xl font-black text-cyan-300">$0.69/min</p>
-                <p className="mt-1 text-sm text-slate-400">RevenueReception AI</p>
+
+              {/* Cost comparison */}
+              <div className="rounded-xl border border-white/10 bg-slate-950/50 p-6">
+                <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-slate-400">What others charge</p>
+                <div className="grid gap-4 sm:grid-cols-3">
+                  <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-4 text-center">
+                    <p className="text-2xl font-black text-red-400">$25/hr</p>
+                    <p className="mt-1 text-sm text-slate-400">Human receptionist</p>
+                    <p className="mt-1 text-xs text-slate-500">Calls in sick. Needs benefits.</p>
+                  </div>
+                  <div className="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4 text-center">
+                    <p className="text-2xl font-black text-amber-400">$1.50/min</p>
+                    <p className="mt-1 text-sm text-slate-400">Answering service</p>
+                    <p className="mt-1 text-xs text-slate-500">Reads a script. Can&apos;t book.</p>
+                  </div>
+                  <div className="rounded-xl border border-cyan-400/30 bg-cyan-400/10 p-4 text-center">
+                    <p className="text-2xl font-black text-cyan-300">$0.69/min</p>
+                    <p className="mt-1 text-sm text-slate-400">RevenueReception AI</p>
+                    <p className="mt-1 text-xs text-cyan-400/70">Books appointments. Sends SMS. Updates CRM.</p>
+                  </div>
+                </div>
+                <p className="mt-5 text-center text-sm font-medium text-white">
+                  A 3-minute call costs ~$2.07 and books a $500–$2,000 service appointment.
+                  <span className="ml-1 text-cyan-300">That&apos;s 250–1,000x ROI per call.</span>
+                </p>
               </div>
             </div>
-            <p className="mt-4 text-center text-sm text-slate-400">
-              A 3-minute call costs you ~$2.07 — and books a $500+ service appointment.
-            </p>
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
