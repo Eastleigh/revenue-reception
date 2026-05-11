@@ -1,0 +1,27 @@
+{
+  "name": "revenue-reception",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RevenueReception AI — AI phone receptionist SaaS for local service businesses",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "db:generate": "turbo run db:generate --filter=@revenue-reception/database",
+    "db:push": "turbo run db:push --filter=@revenue-reception/database",
+    "db:seed": "turbo run db:seed --filter=@revenue-reception/database"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.0",
+    "typescript": "^5.7.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "packageManager": "npm@10.8.0"
+}
