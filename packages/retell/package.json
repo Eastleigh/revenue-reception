@@ -1,0 +1,18 @@
+{
+  "name": "@revenue-reception/retell",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "echo 'no lint configured'",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "retell-sdk": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

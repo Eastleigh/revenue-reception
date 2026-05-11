@@ -1,0 +1,274 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  MEMBER
+}
+
+enum PlanType {
+  STARTER
+  GROWTH
+  AGENCY
+}
+
+enum BillingStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  TRIALING
+}
+
+enum AgentStatus {
+  ACTIVE
+  INACTIVE
+  PROVISIONING
+  ERROR
+}
+
+enum CallStatus {
+  RINGING
+  IN_PROGRESS
+  COMPLETED
+  MISSED
+  FAILED
+  TRANSFERRED
+}
+
+enum CallDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum LeadQuality {
+  HOT
+  WARM
+  COLD
+  SPAM
+}
+
+enum AppointmentStatus {
+  SCHEDULED
+  CONFIRMED
+  COMPLETED
+  CANCELED
+  NO_SHOW
+}
+
+enum CrmProvider {
+  GOHIGHLEVEL
+  HUBSPOT
+  SALESFORCE
+  WEBHOOK
+}
+
+enum CrmIntegrationStatus {
+  CONNECTED
+  DISCONNECTED
+  ERROR
+}
+
+enum SmsStatus {
+  QUEUED
+  SENT
+  DELIVERED
+  FAILED
+}
+
+model User {
+  id             String       @id @default(cuid())
+  email          String       @unique
+  name           String
+  role           UserRole     @default(MEMBER)
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  auditLogs      AuditLog[]
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@map("users")
+}
+
+model Organization {
+  id               String          @id @default(cuid())
+  companyName      String
+  industry         String?
+  plan             PlanType        @default(STARTER)
+  billingStatus    BillingStatus   @default(TRIALING)
+  stripeCustomerId String?         @unique
+  users            User[]
+  agents           Agent[]
+  businessProfile  BusinessProfile?
+  calls            Call[]
+  appointments     Appointment[]
+  crmIntegrations  CrmIntegration[]
+  smsMessages      SmsMessage[]
+  usageRecords     UsageRecord[]
+  auditLogs        AuditLog[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@map("organizations")
+}
+
+model Agent {
+  id               String       @id @default(cuid())
+  organizationId   String
+  organization     Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  retellAgentId    String?      @unique
+  agentName        String
+  industryTemplate String
+  voiceId          String?
+  phoneNumber      String?
+  status           AgentStatus  @default(PROVISIONING)
+  webhookUrl       String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([organizationId])
+  @@map("agents")
+}
+
+model BusinessProfile {
+  id                  String       @id @default(cuid())
+  organizationId      String       @unique
+  organization        Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  businessName        String
+  businessHours       Json?
+  serviceArea         String?
+  servicesOffered     Json?
+  pricingNotes        String?
+  emergencyRules      Json?
+  transferPhoneNumber String?
+  bookingRules        Json?
+  faqContent          Json?
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  @@map("business_profiles")
+}
+
+model Call {
+  id                  String       @id @default(cuid())
+  organizationId      String
+  organization        Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  retellCallId        String?      @unique
+  callerPhone         String?
+  callerName          String?
+  callStatus          CallStatus   @default(RINGING)
+  callDirection       CallDirection @default(INBOUND)
+  startedAt           DateTime?
+  endedAt             DateTime?
+  durationSeconds     Int?
+  transcript          Json?
+  recordingUrl        String?
+  summary             String?
+  leadQuality         LeadQuality?
+  callIntent          String?
+  bookedAppointment   Boolean      @default(false)
+  estimatedRevenue    Float?
+  transferredToHuman  Boolean      @default(false)
+  crmSynced           Boolean      @default(false)
+  appointment         Appointment?
+  smsMessages         SmsMessage[]
+  usageRecord         UsageRecord?
+  createdAt           DateTime     @default(now())
+
+  @@index([organizationId])
+  @@index([retellCallId])
+  @@index([createdAt])
+  @@map("calls")
+}
+
+model Appointment {
+  id               String            @id @default(cuid())
+  organizationId   String
+  organization     Organization      @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  callId           String?           @unique
+  call             Call?             @relation(fields: [callId], references: [id])
+  customerName     String
+  customerPhone    String?
+  customerEmail    String?
+  serviceRequested String?
+  appointmentStart DateTime
+  appointmentEnd   DateTime
+  calendarEventId  String?
+  status           AppointmentStatus @default(SCHEDULED)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  @@index([organizationId])
+  @@index([appointmentStart])
+  @@map("appointments")
+}
+
+model CrmIntegration {
+  id             String               @id @default(cuid())
+  organizationId String
+  organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  provider       CrmProvider
+  apiKeyEncrypted String?
+  webhookUrl     String?
+  locationId     String?
+  status         CrmIntegrationStatus @default(DISCONNECTED)
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+
+  @@index([organizationId])
+  @@map("crm_integrations")
+}
+
+model SmsMessage {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  callId         String?
+  call           Call?        @relation(fields: [callId], references: [id])
+  recipientPhone String
+  messageBody    String
+  status         SmsStatus    @default(QUEUED)
+  sentAt         DateTime?
+  createdAt      DateTime     @default(now())
+
+  @@index([organizationId])
+  @@map("sms_messages")
+}
+
+model UsageRecord {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  retellCallId   String?      @unique
+  call           Call?        @relation(fields: [retellCallId], references: [retellCallId])
+  minutesUsed    Float
+  estimatedCost  Float
+  billingPeriod  String
+  createdAt      DateTime     @default(now())
+
+  @@index([organizationId])
+  @@index([billingPeriod])
+  @@map("usage_records")
+}
+
+model AuditLog {
+  id             String       @id @default(cuid())
+  organizationId String
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  userId         String?
+  user           User?        @relation(fields: [userId], references: [id])
+  action         String
+  metadata       Json?
+  createdAt      DateTime     @default(now())
+
+  @@index([organizationId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
