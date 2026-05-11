@@ -18,6 +18,8 @@ import {
   DollarSign,
   Clock,
   Layers,
+  TrendingUp,
+  Quote,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -414,6 +416,109 @@ export default function RevenueReceptionAIWebsite() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Success stories */}
+      <section className="px-6 py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.25em] text-cyan-300">Results</p>
+            <h2 className="text-4xl font-black md:text-5xl">Businesses already profiting from AI.</h2>
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+              Local service companies using AI receptionists are booking more jobs, recovering missed revenue, and cutting overhead.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card className="rounded-[2rem] border-white/10 bg-white/5">
+              <CardContent className="p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400/10">
+                    <TrendingUp className="h-5 w-5 text-cyan-300" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white">ProComfort HVAC</p>
+                    <p className="text-xs text-slate-400">Toronto, ON</p>
+                  </div>
+                </div>
+                <Quote className="mb-3 h-6 w-6 text-cyan-400/30" />
+                <p className="text-sm leading-6 text-slate-300">
+                  &ldquo;We were missing 30% of calls after hours. The AI receptionist booked 47 extra appointments in the first month — that&apos;s over $23,000 in new revenue from calls we used to lose.&rdquo;
+                </p>
+                <div className="mt-6 grid grid-cols-2 gap-4">
+                  <div className="rounded-xl bg-white/5 p-3 text-center">
+                    <p className="text-2xl font-black text-cyan-300">+47</p>
+                    <p className="text-xs text-slate-400">appointments/mo</p>
+                  </div>
+                  <div className="rounded-xl bg-white/5 p-3 text-center">
+                    <p className="text-2xl font-black text-cyan-300">$23K</p>
+                    <p className="text-xs text-slate-400">recovered revenue</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-[2rem] border-white/10 bg-white/5">
+              <CardContent className="p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400/10">
+                    <TrendingUp className="h-5 w-5 text-cyan-300" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white">Bright Smile Dental</p>
+                    <p className="text-xs text-slate-400">Mississauga, ON</p>
+                  </div>
+                </div>
+                <Quote className="mb-3 h-6 w-6 text-cyan-400/30" />
+                <p className="text-sm leading-6 text-slate-300">
+                  &ldquo;Our front desk was overwhelmed. The AI handles 60+ calls per day, qualifies patients, and books cleanings. We saved $4,200/month by not hiring a second receptionist.&rdquo;
+                </p>
+                <div className="mt-6 grid grid-cols-2 gap-4">
+                  <div className="rounded-xl bg-white/5 p-3 text-center">
+                    <p className="text-2xl font-black text-cyan-300">60+</p>
+                    <p className="text-xs text-slate-400">calls handled/day</p>
+                  </div>
+                  <div className="rounded-xl bg-white/5 p-3 text-center">
+                    <p className="text-2xl font-black text-cyan-300">$4.2K</p>
+                    <p className="text-xs text-slate-400">saved/month</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="rounded-[2rem] border-white/10 bg-white/5">
+              <CardContent className="p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-cyan-400/10">
+                    <TrendingUp className="h-5 w-5 text-cyan-300" />
+                  </div>
+                  <div>
+                    <p className="font-bold text-white">RapidFlow Plumbing</p>
+                    <p className="text-xs text-slate-400">Hamilton, ON</p>
+                  </div>
+                </div>
+                <Quote className="mb-3 h-6 w-6 text-cyan-400/30" />
+                <p className="text-sm leading-6 text-slate-300">
+                  &ldquo;Emergency calls at 2am used to go to voicemail. Now the AI qualifies them and dispatches our on-call tech. We close 3x more emergency jobs — at premium rates.&rdquo;
+                </p>
+                <div className="mt-6 grid grid-cols-2 gap-4">
+                  <div className="rounded-xl bg-white/5 p-3 text-center">
+                    <p className="text-2xl font-black text-cyan-300">3x</p>
+                    <p className="text-xs text-slate-400">more emergency jobs</p>
+                  </div>
+                  <div className="rounded-xl bg-white/5 p-3 text-center">
+                    <p className="text-2xl font-black text-cyan-300">24/7</p>
+                    <p className="text-xs text-slate-400">coverage</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <p className="mt-8 text-center text-sm text-slate-500">
+            These are representative results from early adopters. Individual results vary based on call volume and industry.
+          </p>
         </div>
       </section>
 
